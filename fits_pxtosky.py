@@ -34,13 +34,18 @@ ax = plt.subplot(projection=wcs_helix)
 plt.imshow(image, origin='lower', cmap='cividis', aspect='equal')
 plt.xlabel(r'RA')
 plt.ylabel(r'Dec')
-
 overlay = ax.get_coords_overlay('icrs')
 overlay.grid(color='white', ls='dotted')
 
-# Subtract one because Python is zero-based
+
+# Specify pixel coordinates of interest
 xp = 57.5412-1
 yp = 61.5412-1
 
+# Subtract one because Python is zero-based
+xp = xp - 1
+yp = yp - 1
+
+# Generate RA, DEC angles (in IRCS) from specified pixel coordinates; print to cmd line
 RADEC_new = pixel_to_skycoord(xp, yp, wcs_helix, origin=0, mode='all', cls=None)
 print(RADEC_new)
